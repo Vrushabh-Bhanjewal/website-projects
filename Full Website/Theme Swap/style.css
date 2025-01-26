@@ -1,0 +1,102 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    --accent-color:rgb(247, 114, 65);
+    --background-color:white;
+    --text-color:black;
+    --button-text-color:var(var(--background-color));
+    --transition-delay: 1s;
+
+    height: 100vh;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: var(--transition-delay);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+body.dark{
+    --accent-color:rgb(253, 253, 104);
+    --background-color:rgb(36, 36, 36);
+    --text-color:rgb(255, 255, 255);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#title{
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+#theme-btn{
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    padding: 1rem 2rem;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    transition: var(--transition-delay);
+}
+#theme-btn:hover{
+    scale: 1.1;
+    box-shadow: var(--text-color) 0px 4px 12px;
+}
+.icon{
+    height: 5rem;
+    aspect-ratio: 1;
+    fill: var(--background-color);
+}
+
+.sun-moon-container{
+    --rotation:180;
+    position: absolute;
+    top: 0;
+    height: 200vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events:none;
+    transform: rotate(calc(var(--rotation) * 1deg));
+    transition: var(--transition-delay);
+}
+/* .dark .sun-moon-container{
+    --rotation:180;
+} */
+.sun, .moon {
+    height: 5rem;
+    transition: var(--transition-delay);
+    aspect-ratio: 1;
+    position: absolute;
+    fill:var(--accent-color);
+}
+.sun{
+    top:5%;
+}
+.moon{
+    bottom: 5%;
+    opacity: 0;
+}
+.dark .sun{
+    opacity: 0;
+}
+.dark .moon{
+    opacity: 1;
+    rotate: 180deg;
+}
