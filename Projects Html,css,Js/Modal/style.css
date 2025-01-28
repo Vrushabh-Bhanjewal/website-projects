@@ -1,0 +1,80 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    font-size: 1.5rem;
+}
+.open{
+    background-color: rgb(161, 243, 210);
+    padding: 2rem 4rem;
+    font-size: 2rem;
+    z-index: 1;
+    border-radius: 1rem;
+    box-shadow: 4px 2px 3px gray;
+    /* margin: 5rem auto 0; */
+}
+.open:hover{
+    transform: scale(1.1);
+    transition: all 1s ease;
+}
+.modal{
+    width: 50rem;
+    max-width: 80%;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%,-50%) scale(0) ;
+    pointer-events: none;
+    transition: all 1s ease;
+}
+.modal.active{
+    transform: translate(-50%,-50%) scale(1) ;
+    pointer-events: all;
+}
+.modal .modal-header{
+    display: flex;
+    justify-content:space-between  ;
+    font-variant: small-caps;
+    border-bottom: 2px solid black;
+    padding-bottom: 1rem;
+    & button{
+        font-size: 2rem;
+        background-color: transparent;
+        border: none;
+        font-weight: 900;
+    }
+}
+.modal .modal-body{
+    padding: 1rem 0;
+    text-align: justify;
+}
+.overlay{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.2);
+    pointer-events: none;
+    opacity: 0;
+}
+.overlay.active{
+    opacity: 1;
+    pointer-events: all;
+}

@@ -42,6 +42,7 @@ const addSelectionResult=(select,iswon)=>{
     }
     result.prepend(res)
 }
+
 selection.forEach(element => {
     element.addEventListener('click',(e)=>{
         let selection =element.dataset.user;
