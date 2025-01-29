@@ -1,5 +1,5 @@
 # website-projects
-Full wesite
+Electronic Store wesite
 - https://elctronic-store.netlify.app/
 
 
