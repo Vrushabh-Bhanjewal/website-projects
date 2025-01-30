@@ -35,7 +35,7 @@ export const showNotes=()=>{
                 addNew.insertAdjacentHTML("afterend",note)
             });
 }
-// onclick="editNote(${index},${elem.title},${elem.desc})"
+
 export const addNote=(noteInfo)=>{
     let n=Notes.some((curr)=> curr.title== noteInfo.title)
     // console.log(n)
@@ -56,13 +56,14 @@ export function deleteNote(id){
     // console.log(id)
     Notes.splice(id,1)
     localStorage.setItem('Notes',JSON.stringify(Notes));
-    showNotes()
+    showNotes();
 }
 // ---- edit note
 document.addEventListener('click',(e)=>{
     if(e.target.matches('[data-edit-icon]')){
         let curr=e.target
         isUpdate=true;
+        updateId=curr.dataset.index
         let title=curr.dataset.title
         let desc=curr.dataset.desc
         let index=curr.dataset.index
@@ -75,28 +76,23 @@ document.addEventListener('click',(e)=>{
 })
 
 // ---- Modify data fun
-// export const modifyData=()=>{
-//     console.log('modify data')
-// }
-
-
-// export function editNote(index,title,desc){
-//     console.log(Notes[index])
-    // let a=Notes(id)
-    
-    // console.log(id,title,desc)
-    // let now= Notes.find((curr)=>curr.title==title)
-
-    // let modalElem=document.querySelector('new-modal')
-    // let mtitle=modalElem.querySelector('#modal-title')
-    // mtitle.value=now.title;
-    // let mdesc=modalElem.querySelector('#modal-desc')
-    // mdesc=now.desc;
-    // let mhead=modalElem.querySelector('#modal-head')
-    // mhead.innerText='Modify Note'
-    // openModal()
-// }
+export const modifyData=(noteInfo)=>{
+    console.log('modify data',noteInfo)
+    let data=document.querySelector('[data-edit-icon]')
+    let id=Notes.findIndex((curr)=>curr.title==data.title)
+    console.log(id ,updateId)
+    let newData=Notes.map((curr,index)=>{
+        if(index==updateId){
+            return noteInfo
+        }else{
+            return curr
+        }
+    })
+    localStorage.setItem('Notes',JSON.stringify(newData));
+    Notes=JSON.parse(localStorage.getItem('Notes')) || [];
+    showNotes()
+    isUpdate=false
+}
 
 //  making global fun to window
 window.deleteNote=deleteNote
-// window.editNote=editNote

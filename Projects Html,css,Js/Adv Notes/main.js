@@ -1,5 +1,5 @@
 import { getDate } from "./date.js"
-import { addNote, isUpdate, showNotes } from "./showNotes.js"
+import { addNote, isUpdate, modifyData, showNotes } from "./showNotes.js"
 
 
 let addNoteBtn=document.querySelector('#addNote')
@@ -53,15 +53,11 @@ addData.addEventListener('click',(e)=>{
     titleElem.value="";
     descElem.value="";
 
-    // if(isUpdate){
-    //     modifyData()
-    //     isUpdate=false
-    // }else{
+    if(isUpdate){
+        modifyData( noteInfo)
+        // isUpdate=false
+    }else{
         addNote(noteInfo)
-    // }
-
-
-    // Notes.push(noteInfo);
-    // localStorage.setItem('Notes',JSON.stringify(Notes));
+    }
 })
 
