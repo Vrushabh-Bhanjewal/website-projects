@@ -1,7 +1,12 @@
 import { openModal } from "./main.js";
 
 let Notes=JSON.parse(localStorage.getItem('Notes')) || [];
+let addNoteBtn=document.querySelector('#addNote')
+let modalHead=document.querySelector('#Modal-head')
+let modalTitle=document.querySelector('#NTitle')
+let modalDesc=document.querySelector('#NDesc')
 let addNew=document.querySelector('#addNote')
+export let isUpdate=false,updateId;
 
 export const showNotes=()=>{
     // remove previous notes
@@ -17,7 +22,11 @@ export const showNotes=()=>{
                                 <div class="note-footer">
                                     <span class="note-date">${elem.date}</span>
                                     <span class="icons">
-                                        <i data-edit-icon onclick="editNote(${index},${elem.title})" class="edit-icon fa-regular fa-pen-to-square"></i>
+                                        <i data-edit-icon 
+                                            data-title="${elem.title}"
+                                            data-desc="${elem.desc}"
+                                            data-index="${index}"
+                                            class="edit-icon fa-regular fa-pen-to-square"></i>
                                         <i data-del-icon onclick="deleteNote(${index})" class="delete-icon fa-solid fa-trash"></i>
                                     </span>
                                 </div>
@@ -26,11 +35,15 @@ export const showNotes=()=>{
                 addNew.insertAdjacentHTML("afterend",note)
             });
 }
+// onclick="editNote(${index},${elem.title},${elem.desc})"
 export const addNote=(noteInfo)=>{
     let n=Notes.some((curr)=> curr.title== noteInfo.title)
-    console.log(n)
+    // console.log(n)
     if(n){
         alert("Title Data Exist")
+        return false
+    }
+    if(noteInfo.title==""){
         return false
     }
     Notes.push(noteInfo);
@@ -38,36 +51,52 @@ export const addNote=(noteInfo)=>{
     showNotes()
 }
 
-// delete note
+//---- delete note
 export function deleteNote(id){
-    console.log(id)
+    // console.log(id)
     Notes.splice(id,1)
     localStorage.setItem('Notes',JSON.stringify(Notes));
     showNotes()
 }
-export function editNote(id,title){
-    // let a=Notes(id)
-    console.log(id,title)
-    let now= Notes.find((curr)=>curr.title==title)
+// ---- edit note
+document.addEventListener('click',(e)=>{
+    if(e.target.matches('[data-edit-icon]')){
+        let curr=e.target
+        isUpdate=true;
+        let title=curr.dataset.title
+        let desc=curr.dataset.desc
+        let index=curr.dataset.index
+        // console.log(title,desc,index)
+        addNoteBtn.click()
+        modalHead.innerText="Upadte Data"
+        modalTitle.value=title;
+        modalDesc.value=desc;
+    }
+})
 
-    let modalElem=document.querySelector('new-modal')
-    let mtitle=modalElem.querySelector('#modal-title')
-    mtitle.value=now.title;
-    let mdesc=modalElem.querySelector('#modal-desc')
-    mdesc=now.desc;
-    let mhead=modalElem.querySelector('#modal-head')
-    mhead.innerText='Modify Note'
-    openModal()
-}
-    // mtitle.value=title;
-    // mdesc.value=desc;
-    // mhead.innerText="Modify Note";
-    // let mtitle=document.querySelector('#modal-title')
+// ---- Modify data fun
+// export const modifyData=()=>{
+//     console.log('modify data')
+// }
+
+
+// export function editNote(index,title,desc){
+//     console.log(Notes[index])
+    // let a=Notes(id)
     
-    // openModal(modalElem)
-    // let a=Notes[id]
-    // console.log(a)
+    // console.log(id,title,desc)
+    // let now= Notes.find((curr)=>curr.title==title)
+
+    // let modalElem=document.querySelector('new-modal')
+    // let mtitle=modalElem.querySelector('#modal-title')
+    // mtitle.value=now.title;
+    // let mdesc=modalElem.querySelector('#modal-desc')
+    // mdesc=now.desc;
+    // let mhead=modalElem.querySelector('#modal-head')
+    // mhead.innerText='Modify Note'
+    // openModal()
+// }
 
 //  making global fun to window
 window.deleteNote=deleteNote
-window.editNote=editNote
+// window.editNote=editNote

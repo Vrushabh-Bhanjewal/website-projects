@@ -1,5 +1,5 @@
 import { getDate } from "./date.js"
-import { addNote, showNotes } from "./showNotes.js"
+import { addNote, isUpdate, showNotes } from "./showNotes.js"
 
 
 let addNoteBtn=document.querySelector('#addNote')
@@ -8,10 +8,16 @@ let closeBtn=document.querySelector('.icon-close')
 let addData=document.querySelector('#addData')
 let deleteElem=document.querySelectorAll('[data-del-icon]')
 let editElem=document.querySelectorAll('[data-edit-icon]')
+let titleElem=document.querySelector('#NTitle');
+let descElem=document.querySelector('#NDesc');
+let modalHead=document.querySelector('#Modal-head')
 let Notes=JSON.parse(localStorage.getItem('Notes')) || [];
 
 // -------- modal code
 export const openModal=(modal)=>{
+    modalHead.innerText="Add New Data"
+    titleElem.value="";
+    descElem.value="";
     modal.classList.add('active')
     shadow.classList.add('active')
 }
@@ -35,22 +41,27 @@ closeBtn.addEventListener('click',(e)=>{
     let modalElem=closeBtn.closest('#new-modal')
     closeModal(modalElem)
 })
-
 showNotes()
 
 // ------- Data add code
 addData.addEventListener('click',(e)=>{
     e.preventDefault();
-    let titleElem=document.querySelector('#NTitle');
-    let descElem=document.querySelector('#NDesc');
     let date=getDate()
     let title=titleElem.value;
     let desc=descElem.value;
     let noteInfo={title,desc,date};
     titleElem.value="";
     descElem.value="";
+
+    // if(isUpdate){
+    //     modifyData()
+    //     isUpdate=false
+    // }else{
+        addNote(noteInfo)
+    // }
+
+
     // Notes.push(noteInfo);
     // localStorage.setItem('Notes',JSON.stringify(Notes));
-    addNote(noteInfo)
 })
 

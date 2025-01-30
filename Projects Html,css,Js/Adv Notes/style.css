@@ -137,6 +137,7 @@ body{
             font-size: 2rem;
             color: black;
             border: 1px solid black;
+            border-radius: 1rem;
             background-color: #7ef4c5;
             /* background:linear-gradient(45deg,rgb(68, 243, 202),rgb(53, 205, 247)); */
             /* background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4); */
