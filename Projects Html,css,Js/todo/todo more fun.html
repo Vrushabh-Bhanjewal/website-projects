@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 62.5%;
+            box-sizing: border-box;
+        }
+        h1{
+            font-size: 4rem;
+        }
+        p{
+            font-size: 2rem;
+            line-height: 1.5;
+        }
+        input,button{
+            font-size: 2rem;
+        }
+        .section-main{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+        .container{
+            margin-top: 5rem;
+            text-align: center;
+        }
+        button,input{
+            padding: 0.5rem 2rem;
+        }
+        .del{
+            border-radius: 1rem;
+            border: none;
+            background-color: rgb(112, 111, 111);
+            color: white;
+        }
+        .todo-list .item{
+            display: flex;
+            /* padding: 0.5rem 2rem; */
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <section class="section-main">
+        <form class="container">
+            <h1>TODO APP</h1>
+            <input type="text" class="inputText">
+            <button id="btn">click me</button>
+            <div class="todo-list" >
+                <div class="item">
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        let input=document.getElementsByClassName('inputText')[0]
+        let add= document.getElementById('btn')
+        let list=document.getElementsByClassName('todo-list')[0]
+        const addtodoData=(localData)=>{
+            localStorage.setItem('localdata',JSON.stringify(localData))
+            
+        }
+        const getlocalData=()=>{
+            let data= JSON.parse(localStorage.getItem('localdata'))
+            // console.log(data)
+            return data
+
+        }
+        const showDynamicData=(curr)=>{
+            let item=document.createElement('div') 
+            item.classList.add('item')
+            item.innerHTML=`<p class="todo-items">${curr}</p>
+                    <button class="del">Delete</button>`
+            list.append(item)
+            input.value=""
+        }
+        let localData=getlocalData() || []
+
+        const addData = (e)=>{
+            e.preventDefault()
+            let val=input.value.trim()
+            input.value=""
+            if(!localData.includes(val) && !val=="" ){
+            localData.push(val)
+            localData=[...new Set(localData)]
+            console.log(localData)
+            localStorage.setItem('localdata',JSON.stringify(localData))
+            showDynamicData(val)
+            }
+        }
+        add.addEventListener("click",(e)=>{addData(e)})
+        const removeData=(e)=>{
+            e.preventDefault()
+            let p=e.target.previousElementSibling.innerText
+            let parent=e.target.parentElement
+            localData=localData.filter(curr=>{
+                return curr!=p  
+            })
+            console.log(localData)
+            addtodoData(localData)
+            parent.remove()
+        }
+        list.addEventListener('click',(e)=>{
+            if(e.target.classList.contains('del')){
+                removeData(e)
+            }
+        })
+        const showData=()=>{
+            localData.forEach(curr => {
+                showDynamicData(curr)
+            });
+        }
+        showData()
+    </script>
+</body>
+</html>

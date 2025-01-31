@@ -7,8 +7,10 @@ html{
     font-size: 62.5%;
 }
 body{
-    min-height: 100vh;
+    height: auto;
+    /* max-height: max-content; */
     width: 100%;
+    margin: auto;
     background:linear-gradient(rgb(53, 205, 247),rgb(68, 243, 202));
     background-attachment: fixed;
     font-size: 1.5rem;
@@ -16,15 +18,25 @@ body{
     padding: 5rem 5rem;
 }
 .container{
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
-    margin: auto;
+    margin: 3rem auto ;
     max-width: 140rem;
     display: grid;
     grid-template-columns: repeat(auto-fit,25rem);
     grid-template-rows: repeat(auto-fit,25rem);
     gap:2.5rem;
-    justify-items: center;
+    justify-content: center;
+    /* justify-items: center; */
+}
+.note-heading{
+    text-align: center;
+    color: white;
+    font-size: 4rem;
+    font-weight: 600;
+    border-bottom: 2px solid white;
+    padding-bottom: 1rem;
+
 }
 #addNote{
     display: flex;

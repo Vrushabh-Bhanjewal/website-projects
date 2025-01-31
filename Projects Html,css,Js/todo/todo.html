@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TODO APP</h1>
+        <input type="text" class="inputText">
+        <button id="btn">click me</button>
+        <div class="todo-list" >
+        </div>
+    </div>
+    <script>
+        let input=document.getElementsByClassName("inputText")[0];  
+        // return htmlcollection so first elem in that
+        let button=document.getElementById("btn")
+        let list= document.getElementsByClassName("todo-list")[0]
+        function addItem(){
+            console.log(input.value); 
+            let p=document.createElement('p')
+            p.innerText=input.value 
+            // console.log(p)
+            list.append(p)
+            input.value=""
+        }
+        button.addEventListener("click",()=>{addItem()}) 
+        list.addEventListener("click",()=>{
+            let c=(event.target)
+            c.remove()
+        })
+    </script>
+</body>
+</html>

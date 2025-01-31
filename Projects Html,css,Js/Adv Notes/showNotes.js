@@ -31,14 +31,12 @@ export const showNotes=()=>{
                                     </span>
                                 </div>
                             </div>`;
-                
                 addNew.insertAdjacentHTML("afterend",note)
             });
 }
 
 export const addNote=(noteInfo)=>{
     let n=Notes.some((curr)=> curr.title== noteInfo.title)
-    // console.log(n)
     if(n){
         alert("Title Data Exist")
         return false

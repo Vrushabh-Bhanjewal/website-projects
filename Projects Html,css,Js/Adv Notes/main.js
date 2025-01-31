@@ -52,12 +52,10 @@ addData.addEventListener('click',(e)=>{
     let noteInfo={title,desc,date};
     titleElem.value="";
     descElem.value="";
-
+    // if data is modified
     if(isUpdate){
         modifyData( noteInfo)
-        // isUpdate=false
     }else{
         addNote(noteInfo)
     }
 })
-
