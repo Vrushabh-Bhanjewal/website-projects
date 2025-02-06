@@ -1,0 +1,88 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background: linear-gradient(30deg,rgb(158, 227, 236),rgb(112, 110, 253));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.age-container{
+    padding: 0 2rem;
+}
+h1{
+    font-size: 6rem;
+    color: white;
+}
+h1:nth-child(2){
+    color: yellow;
+    margin-bottom: 3rem;
+}
+.container{
+    background-color: rgba(255, 255, 255, 0.514);
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    max-width: 50rem;
+    min-width: 90%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+#age{
+    width: 70%;
+    padding: 1rem 2rem;
+    font-size: 1.7rem;
+    position: relative;
+    /* border-radius: 1rem; */
+    border: none;
+}
+#age::-webkit-calendar-picker-indicator{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 10px;
+    bottom: 0;
+    background-size: cover;
+    width: auto;
+    height: auto;
+    background-size: 30px;
+    background-position: 100%;
+    
+}
+/* #age:deate */
+#calc{
+    padding: 1rem 2rem;
+    font-size: 1.7rem;
+    background-color: yellow;
+    border: none;
+    cursor: pointer;
+}
+#res{
+    font-size:2rem;
+    padding: 1rem;
+    color: white;
+    & span{
+        color: yellow;
+    }
+}
+@media (width< 900px){
+    html{
+        font-size: 50%;
+    }
+}
+@media (width <500px){
+    html{
+        font-size: 44%;
+    }
+    .age-container{
+        width: 100%;
+    }
+}
